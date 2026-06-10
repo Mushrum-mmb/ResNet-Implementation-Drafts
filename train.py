@@ -44,7 +44,7 @@ warnings.filterwarnings("ignore")
 
 # Defines a function to parse command-line arguments for the script.
 def get_args():
-  parser = parser.ArgumentParser(description= "Animal Classifier")
+  parser = argparse.ArgumentParser(description= "Animal Classifier")
 
   parser.add_argument("--num-epochs","-e", type=int, default=75, help="Number of epochs")
   parser.add_argument("--batch-size", "-b", type=int, default=64, help="batch size of training procedure")
