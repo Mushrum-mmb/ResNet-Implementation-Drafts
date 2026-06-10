@@ -1,13 +1,13 @@
-# 🤖 Simple AI Image Classification
+# 🤖 ResNet Implementation Drafts
 
 <div align="center">
+
+### **I made this for educational purposes, exploring ResNet architectures, custom training loops, and hands-on deep learning implementations of Image Classification.**
 
 ![AI Banner](https://img.shields.io/badge/AI-Image%20Classification-blue?style=for-the-badge&logo=tensorflow&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3.8+-blue?style=for-the-badge&logo=python&logoColor=white)
 ![PyTorch](https://img.shields.io/badge/PyTorch-Latest-red?style=for-the-badge&logo=pytorch&logoColor=white)
 ![ResNet](https://img.shields.io/badge/Model-ResNet--50-green?style=for-the-badge&logo=atom&logoColor=white)
-
-### 🎯 **I made this for educational purposes and to showcase my experience in creating AI applications.**
 
 ⭐ **Star this repo if it helps you!** ⭐
 
@@ -24,57 +24,50 @@
 
 ## 📋 Table of Contents
 
-- [🚀 About](#-about)
-- [✨ Features](#-features)
-- [⬇️ Installation](#️-installation)
-- [▶️ Usage](#️-usage)
-- [💻 Google Colab Usage](#-google-colab-usage)
-- [🔧 How It Works](#-how-it-works)
-- [📈 Performance](#-performance)
-- [🤝 Contributing](#-contributing)
-- [📜 License](#-license)
+- [About](#-about)
+- [Features](#-features)
+- [Gallery](#-gallery)
+- [Local Usage](#-local-usage)
+- [Google Colab Usage](#-google-colab-usage)
+- [How It Works](#-how-it-works)
+- [Contributing](#-contributing)
+- [License](#-license)
 
 
 ## 🚀 About
 
 <div align="center">
 
-**🎯 Cutting-edge AI image classification powered by deep learning!**
+**🤖 Cutting-edge AI image classification powered by ResNet-50!**
 
 </div>
 
 <div align="center">
 
-| 🎯 **Accuracy** | 🚀 **Model** | 🛠️ **Framework** | 👨‍💻 **Author** |
+| **Accuracy** | **Model** | **Framework** | **Author** |
 |:---:|:---:|:---:|:---:|
 | **99.81% (Over-fitting)** | ResNet-50 | Gradio | [Mushrum-mmb](https://github.com/Mushrum-mmb/) |
 
 </div>
 
 ### 🌟 **Key Highlights:**
-- 🔥 **State-of-the-art accuracy** at 99.81%, may be it's over-fitting.
-- ⚡ **Real-time predictions** with confidence scores
-- 🌐 **Web-based interface** for easy access
-- 🚀 **Comment tutoring** support in code
-- 📱 **Cross-platform compatibility**
-
-![image](https://github.com/user-attachments/assets/df568fd1-b25f-49e3-92c5-360d37624238)
-![image](https://github.com/user-attachments/assets/4556fa99-a84a-4df5-8e14-5cdbf633069f)
-
+- **State-of-the-art accuracy** at 99.81%, may be it's over-fitting.
+- **Real-time predictions** with confidence scores
+- **Web-based interface** for easy access
+- **Comment tutoring** support in code
+- **Cross-platform compatibility**
 ---
 
-## 📈 Performance
+## 📸 Gallery
 
 <div align="center">
-
-### 🎯 **Current Model Performance**
+    
+### 📊 **Current Model Performance**
 
 ![Accuracy Badge](https://img.shields.io/badge/Accuracy-99.81%25-brightgreen?style=for-the-badge&logo=target&logoColor=white)
-![Status](https://img.shields.io/badge/Status-Production%20Ready-success?style=for-the-badge&logo=checkmarx&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Overfitting-orange?style=for-the-badge&logo=target&logoColor=white)
 
-> **Note:** This exceptional accuracy is calculated from validation datasets. Real-world performance may vary. It's also over-fitting.
-
-</div>
+**Note:** *This exceptional accuracy is calculated from validation datasets. Real-world performance may vary. It's also over-fitting.*
 
 <div align="center">
 <img src="https://github.com/user-attachments/assets/15509cc8-ad6e-4a65-aa44-0297fbffdb9f" alt="Individual Image Results" width="45%"/>
@@ -87,29 +80,38 @@
 <img src="https://github.com/user-attachments/assets/d5d7006c-66b2-4c90-9fa3-f9bdc218376b" alt="Model Architecture" width="30%"/>
 </div>
 
+*Examples of successful animal image classification*
+
+</div>
+
+![image](https://github.com/user-attachments/assets/df568fd1-b25f-49e3-92c5-360d37624238)
+![image](https://github.com/user-attachments/assets/4556fa99-a84a-4df5-8e14-5cdbf633069f)
+ 
+</div>
+
 ---
 
 ## ✨ Features
 
 <div align="center">
 
-### 🎭 **What Makes This Special?**
+### **What Makes This Special?**
 
 </div>
 
 | Feature | Description | Benefit |
 |---------|-------------|---------|
-| 🖼️ **Image Classification** | Upload images for instant animal category prediction | Quick and accurate results |
-| 🧠 **Pre-trained Model** | ResNet-50 architecture fine-tuned on animal datasets | Superior accuracy and reliability |
-| ⚡ **Real-time Inference** | Instant predictions with confidence percentages | Immediate feedback for users |
-| 🚀 **GPU Acceleration** | Automatic GPU detection and utilization | Lightning-fast processing |
-| 🌐 **Easy Deployment** | One-command launch with public sharing option | Hassle-free setup and sharing |
-| 💻 **Google Colab Ready** | Optimized for cloud-based training and testing | Perfect for low-spec devices |
+| **Image Classification** | Upload images for instant animal category prediction | Quick and accurate results |
+| **Pre-trained Model** | ResNet-50 architecture fine-tuned on animal datasets | Superior accuracy and reliability |
+| **Real-time Inference** | Instant predictions with confidence percentages | Immediate feedback for users |
+| **GPU Acceleration** | Automatic GPU detection and utilization | Lightning-fast processing |
+| **Easy Deployment** | One-command launch with public sharing option | Hassle-free setup and sharing |
+| **Google Colab Ready** | Optimized for cloud-based training and testing | Perfect for low-spec devices |
 
 <div align="center">
 
 ### 🎯 **Perfect For:**
-🎓 **Students** • 🔬 **Researchers** • 👨‍💻 **Developers** 
+**Students** • **Researchers** • **Developers** 
 
 </div>
 
@@ -230,7 +232,7 @@ Can't run AI on your device? No problem! Use our optimized Google Colab notebook
 
 <div align="center">
 
-### 🏗️ **Architecture Overview**
+### **Architecture Overview**
 
 </div>
 
@@ -240,34 +242,34 @@ Our AI system consists of five core components working in harmony:
 
 ```mermaid
 graph TD
-    A[🖼️ Image Input] --> B[📊 Collect.py]
-    B --> C[📚 Datasets.py]
-    C --> D[🎯 Train.py]
-    D --> E[🧪 Test.py]
-    E --> F[🌐 Run.py]
-    F --> G[🎉 Gradio Interface]
+    A[Image Input] --> B[Collect.py]
+    B --> C[Datasets.py]
+    C --> D[Train.py]
+    D --> E[Test.py]
+    E --> F[Run.py]
+    F --> G[Gradio Interface]
 ```
 
 </div>
 
 | Component | Purpose | Key Features |
 |-----------|---------|-------------|
-| 🔍 **Collect.py** | Data Collection | • Automated Google Images scraping<br>• Smart URL parsing and validation<br>• Structured file organization |
-| 📚 **Datasets.py** | Data Management | • Custom PyTorch dataset class<br>• Image normalization and transforms<br>• Train/test data splitting |
-| 🎯 **Train.py** | Model Training | • ResNet-50 architecture implementation<br>• TensorBoard logging integration<br>• Automatic checkpoint saving |
-| 🧪 **Test.py** | Model Testing | • Single image inference<br>• Confidence score calculation<br>• Visual result display |
-| 🌐 **Run.py** | Web Interface | • Gradio-powered UI<br>• Real-time predictions<br>• Public sharing capabilities |
+| **Collect.py** | Data Collection | • Automated Google Images scraping<br>• Smart URL parsing and validation<br>• Structured file organization |
+| **Datasets.py** | Data Management | • Custom PyTorch dataset class<br>• Image normalization and transforms<br>• Train/test data splitting |
+| **Train.py** | Model Training | • ResNet-50 architecture implementation<br>• TensorBoard logging integration<br>• Automatic checkpoint saving |
+| **Test.py** | Model Testing | • Single image inference<br>• Confidence score calculation<br>• Visual result display |
+| **Run.py** | Web Interface | • Gradio-powered UI<br>• Real-time predictions<br>• Public sharing capabilities |
 
 <details>
 <summary>🔬 <strong>Technical Deep Dive (Click to expand)</strong></summary>
 
-### 🧠 **Model Architecture:**
+### **Model Architecture:**
 - **Base Model:** ResNet-50 (pre-trained on ImageNet)
 - **Fine-tuning:** Custom animal classification layers
 - **Optimization:** Adam optimizer with learning rate scheduling
 - **Loss Function:** Cross-entropy loss for multi-class classification
 
-### 📊 **Data Pipeline:**
+### **Data Pipeline:**
 - **Collection:** Automated web scraping with error handling
 - **Preprocessing:** Image resizing, normalization, and augmentation
 - **Validation:** Stratified train/validation split
@@ -289,11 +291,11 @@ graph TD
 
 We love contributions from the community! Here's how you can help:
 
-- 🐛 **Report bugs** or suggest features
-- 🔧 **Submit pull requests** with improvements
-- 📖 **Improve documentation** and tutorials
-- 🎯 **Share your results** and use cases
-- ⭐ **Star the repo** to show support!
+- **Report bugs** or suggest features
+- **Submit pull requests** with improvements
+- **Improve documentation** and tutorials
+- **Share your results** and use cases
+- **Star the repo** to show support!
 
 ---
 
@@ -304,22 +306,5 @@ We love contributions from the community! Here's how you can help:
 [![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
-
-</div>
-
----
-
-<div align="center">
-
-### 🌟 **Made with ❤️ by [Mushrum-mmb](https://github.com/Mushrum-mmb/)**
-
-**If this project helped you, please consider giving it a ⭐!**
-
-[![GitHub stars](https://img.shields.io/github/stars/Mushrum-mmb/Simple-AI-Image-Classification?style=social)](https://github.com/Mushrum-mmb/Simple-AI-Image-Classification/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/Mushrum-mmb/Simple-AI-Image-Classification?style=social)](https://github.com/Mushrum-mmb/Simple-AI-Image-Classification/network)
-
----
-
-**🚀 Happy Classifying! 🤖✨**
 
 </div>
