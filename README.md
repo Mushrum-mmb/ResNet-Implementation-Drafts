@@ -153,7 +153,7 @@ pip install torch torchvision gradio opencv-python scikit-learn matplotlib tenso
 
 ---
 
-## ▶️ Usage
+## ▶️ Local Usage
 
 <div align="center">
 
