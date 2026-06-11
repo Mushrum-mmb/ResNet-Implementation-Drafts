@@ -27,7 +27,7 @@
 - [About](#-about)
 - [Features](#-features)
 - [Gallery](#-gallery)
-- [Local Usage](#-local-usage)
+- [Local Usage](#--local-usage)
 - [Google Colab Usage](#-google-colab-usage)
 - [How It Works](#-how-it-works)
 - [Contributing](#-contributing)
