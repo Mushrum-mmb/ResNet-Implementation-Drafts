@@ -117,42 +117,6 @@
 
 ---
 
-## ⬇️ Installation
-
-<div align="center">
-
-### 🛠️ **Get Started in Minutes!**
-
-</div>
-
-> **📋 Prerequisites:** Ensure you have Git installed and Python environment set up.
-
-<details>
-<summary>🔧 <strong>For Local Installation (Click to expand)</strong></summary>
-
-**Step 1:** Install required dependencies
-```bash
-pip install torch torchvision gradio opencv-python scikit-learn matplotlib tensorboard tqdm requests beautifulsoup4
-```
-
-**Step 2:** Download training artifacts
-- 📥 Go to [Releases](https://github.com/Mushrum-mmb/Simple-AI-Image-Classification/releases/tag/Training_artifacts)
-- 📁 Download `Training artifacts.zip`
-- 📂 Extract the zip file
-
-</details>
-
-<details>
-<summary>☁️ <strong>For Google Colab Users (Click to expand)</strong></summary>
-
-**Good news!** Skip local installation and use our cloud-ready setup:
-- 📥 Download only the `Training artifacts.zip` file
-- 🚫 No need to unzip - we'll handle that in Colab!
-
-</details>
-
----
-
 ## ▶️ Local Usage
 
 <div align="center">
@@ -242,8 +206,7 @@ Our AI system consists of five core components working in harmony:
 
 ```mermaid
 graph TD
-    A[Image Input] --> B[Collect.py]
-    B --> C[Datasets.py]
+    A[Image Input] --> C[Datasets.py]
     C --> D[Train.py]
     D --> E[Test.py]
     E --> F[Run.py]
@@ -254,28 +217,10 @@ graph TD
 
 | Component | Purpose | Key Features |
 |-----------|---------|-------------|
-| **Collect.py** | Data Collection | • Automated Google Images scraping<br>• Smart URL parsing and validation<br>• Structured file organization |
 | **Datasets.py** | Data Management | • Custom PyTorch dataset class<br>• Image normalization and transforms<br>• Train/test data splitting |
 | **Train.py** | Model Training | • ResNet-50 architecture implementation<br>• TensorBoard logging integration<br>• Automatic checkpoint saving |
 | **Test.py** | Model Testing | • Single image inference<br>• Confidence score calculation<br>• Visual result display |
 | **Run.py** | Web Interface | • Gradio-powered UI<br>• Real-time predictions<br>• Public sharing capabilities |
-
-<details>
-<summary>🔬 <strong>Technical Deep Dive (Click to expand)</strong></summary>
-
-### **Model Architecture:**
-- **Base Model:** ResNet-50 (pre-trained on ImageNet)
-- **Fine-tuning:** Custom animal classification layers
-- **Optimization:** Adam optimizer with learning rate scheduling
-- **Loss Function:** Cross-entropy loss for multi-class classification
-
-### **Data Pipeline:**
-- **Collection:** Automated web scraping with error handling
-- **Preprocessing:** Image resizing, normalization, and augmentation
-- **Validation:** Stratified train/validation split
-- **Loading:** Efficient batch processing with PyTorch DataLoader
-
-</details>
 
 ---
 
