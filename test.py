@@ -3,7 +3,6 @@ In this script, we will test our AI with the best weights using real images.
 We will observe the accuracy and optimize our training or even the datasets if needed.
 First import:
 - import torch: Main library for building and training neural networks in PyTorch.
-- from torchvision.models import resnet50, ResNet50_Weights: Imports the ResNet50 model architecture and weights for image classification.
 - import torch.nn as nn: Contains classes for building neural network layers in PyTorch.
 - import os: Interacts with the operating system for file and directory operations.
 - import numpy as np: Supports numerical computations and array operations.
@@ -34,18 +33,18 @@ warnings.filterwarnings("ignore")
 # Define a test function with image_path is parameter.
 def test(image_path):
   # Initialize the constantly categories.
-  categories = ['dog','cat','cabypara','hamster','parrot','pufferfish']
+  categories = ['dog','cat','chicken', 'cow', 'elephant','horse','sheep', 'squirrel']
   # Set the checkpoint_path
-  checkpoint_path = "/content/drive/MyDrive/checkpoint"
+  checkpoint_path = "/content/checkpoint"
   # Use PyTorch to set the device to CUDA if available; otherwise, set it to CPU.
   device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
   print(f"Device: {device}")
-  
+
   # In this section, we will choose the model. Since I am using transfer learning, I will select ResNet50 and its weights.
   model = resnet50(weights=ResNet50_Weights.IMAGENET1K_V1)
   in_features = model.fc.in_features # Remain the in_features of Dense Layer
   del model.fc # Delete it
-  model.fc = nn.Linear(in_features=in_features, out_features=len(train_datasets.categories), bias=True) # Modify it to remove the fully connected layers, ensuring the output length matches the number of categories.
+  model.fc = nn.Linear(in_features=in_features, out_features=len(categories), bias=True) # Modify it to remove the fully connected layers, ensuring the output length matches the number of categories.
   # Bring model into device
   model.to(device)
 
@@ -70,7 +69,7 @@ def test(image_path):
   image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
   image = cv2.resize(image, (224,224))
   # ToTensor() will be (3, 224, 224) and after unsqueeze(0), the shape will be (1, 3, 224, 224), which is suitable for model input.
-  image_tensor = transform(image).unsqueeze(0).to(device) 
+  image_tensor = transform(image).unsqueeze(0).to(device)
 
   # Start predicting and calculate the scores
   with torch.no_grad():
@@ -87,5 +86,7 @@ def test(image_path):
   plt.show()
 
 if __name__ == '__main__':
-  image_path = ""
-  test(image_path)
+  cat = "/content/data/AnimalDataset/val/cat/194.jpeg"
+  test(cat)
+  dog = "/content/data/AnimalDataset/val/dog/OIP-0cYdzGqi1lvZQkk0Hy0GGAHaIu.jpeg"
+  test(dog)
