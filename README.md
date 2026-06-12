@@ -64,7 +64,9 @@
     
 ### 📊 **Current Model Performance**
 
-**Note:** *This exceptional accuracy is calculated from validation datasets. Real-world performance may vary. *
+
+*Note: This exceptional accuracy is calculated from validation datasets. Real-world performance may vary. *
+
 
 ![Accuracy Badge](https://img.shields.io/badge/Accuracy-92.5%25-brightgreen?style=for-the-badge&logo=target&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-ProductionReady-green?style=for-the-badge&logo=target&logoColor=white)
@@ -156,8 +158,8 @@ python app.py
 ```
 
 <div align="center">
-### 🎉 **Your AI is Ready!**
-Open the provided link in your browser and start classifying images!
+    
+*🎉 Your AI is Ready! Open the provided link in your browser and start classifying images!*
 
 </div>
 
