@@ -133,7 +133,7 @@
 
 <div align="center">
 
-### 🚀 **Launch Your AI in 3 Simple Steps!**
+### 🚀 **Launch Your AI in 4 Simple Steps!**
 
 </div>
 
