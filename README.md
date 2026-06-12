@@ -173,24 +173,12 @@ Open the provided link in your browser and start classifying images!
 Can't run AI on your device? No problem! Use our optimized Google Colab notebook for seamless cloud-based AI training and inference.
 
 <details>
-<summary>📖 <strong>Step-by-Step Colab Guide (Click to expand)</strong></summary>
+<summary>📖 <strong>Colab Guide (Click to expand)</strong></summary>
 
-**Step 1:** Navigate to the Gradio installation section
-![Colab Step 1](https://github.com/user-attachments/assets/a9c9d4eb-e80b-46d0-9c46-64fd4d145e49)
+*Just execute the first and second cell*
+<img width="1808" height="770" alt="image" src="https://github.com/user-attachments/assets/3d92bae8-4ad5-4689-b835-acd73a8615ac" />
 
-**Step 2:** Run the installation cell
-![Colab Step 2](https://github.com/user-attachments/assets/85778e45-9bdf-4b05-a9d8-48efedd338f6)
-
-**Step 3:** Upload `Training_artifacts.zip` to `/content`
-![Colab Step 3](https://github.com/user-attachments/assets/5dde14d7-eac2-462b-bd45-a672e5d02815)
-
-**Step 4:** Verify upload completion
-![Colab Step 4](https://github.com/user-attachments/assets/d14bfc65-8367-4f02-b0e5-e869288c3421)
-
-**Step 5:** Execute the processing cell
-![Colab Step 5](https://github.com/user-attachments/assets/c19f80b7-d3e3-4fb8-ac37-770ccc8ae5d8)
-
-**Step 6:** Launch and enjoy! 🎉
+**Launch and enjoy! 🎉**
 
 </details>
 
@@ -210,10 +198,10 @@ Our AI system consists of five core components working in harmony:
 
 ```mermaid
 graph TD
-    A[Image Input] --> C[Datasets.py]
-    C --> D[Train.py]
-    D --> E[Test.py]
-    E --> F[Run.py]
+    A[Image Input] --> C[datasets.py]
+    C --> D[train.py]
+    D --> E[test.py]
+    E --> F[app.py]
     F --> G[Gradio Interface]
 ```
 
@@ -221,10 +209,10 @@ graph TD
 
 | Component | Purpose | Key Features |
 |-----------|---------|-------------|
-| **Datasets.py** | Data Management | • Custom PyTorch dataset class<br>• Image normalization and transforms<br>• Train/test data splitting |
-| **Train.py** | Model Training | • ResNet-50 architecture implementation<br>• TensorBoard logging integration<br>• Automatic checkpoint saving |
-| **Test.py** | Model Testing | • Single image inference<br>• Confidence score calculation<br>• Visual result display |
-| **Run.py** | Web Interface | • Gradio-powered UI<br>• Real-time predictions<br>• Public sharing capabilities |
+| **datasets.py** | Data Management | • Custom PyTorch dataset class<br>• Image normalization and transforms<br>• Train/test data splitting |
+| **train.py** | Model Training | • ResNet-50 architecture implementation<br>• TensorBoard logging integration<br>• Automatic checkpoint saving |
+| **test.py** | Model Testing | • Single image inference<br>• Confidence score calculation<br>• Visual result display |
+| **app.py** | Web Interface | • Gradio-powered UI<br>• Real-time predictions<br>• Public sharing capabilities |
 
 ---
 
