@@ -5,16 +5,35 @@ First import:
 - from torch.utils.data import Dataset: For creating custom datasets in PyTorch.
 - import os: For file and directory operations.
 - import numpy as np: For numerical operations and array handling.
-- from torchvision.transforms import ToTensor, Normalize, Compose: For image preprocessing (converting to tensors, normalization, and chaining transformations). 
+- from torchvision.transforms import ToTensor, Normalize, Compose: For image preprocessing (converting to tensors, normalization, and chaining transformations).
 - import random: For generating random numbers and performing random operations.
 - import cv2: For computer vision and image processing tasks.
 """
 from torch.utils.data import Dataset
+import gdown
+import zipfile
 import os
 import numpy as np
 from torchvision.transforms import ToTensor, Normalize, Compose
 import random
 import cv2
+
+#Download dataset
+def download():
+  try:
+      BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+  except NameError:
+      BASE_DIR = os.getcwd()
+  zip_path = os.path.join(BASE_DIR, "dataset.zip")
+  gdown.download(id="1epzmENKDQZpEFIMpIz0SgPgf8mKDFps6", output=zip_path)
+
+  extract_path = os.path.join(BASE_DIR, "data")
+  with zipfile.ZipFile(zip_path, "r") as zip_ref:
+      zip_ref.extractall(extract_path)
+  os.remove(zip_path)
+  final_path = os.path.join(extract_path, "AnimalDataset")
+  return BASE_DIR, final_path
+
 # Create a class for our dataset.
 class AnimalDatasets(Dataset):
     def __init__(self, root, is_train, height, width, size= None):
@@ -23,7 +42,7 @@ class AnimalDatasets(Dataset):
         self.labels = []
         self.height = height
         self.width = width
-        self.categories = ['dog','cat','cabypara','hamster','parrot','pufferfish']
+        self.categories = ['dog','cat','chicken', 'cow', 'elephant','horse','sheep', 'squirrel']
         # Initialize the mean and standard deviation for normalization. Compose the ToTensor() and Normalize() functions to initialize the transforms.
         mean = np.array([0.485, 0.456, 0.406])
         std = np.array([0.229, 0.224, 0.225])
@@ -65,12 +84,12 @@ if __name__ == '__main__':
     We can test the datasets by retrieving an image or visualizing it using plt or cv2.
     Set the dataset_path and use __getitem__ to retrieve the image and label.
     """
-    dataset_path = "/content/drive/MyDrive/AnimalDataset"
+    basedir, dataset_path = download()
     test_dataset = AnimalDatasets(dataset_path, True, 240, 240, None)
     # Retrieve an image and its label
     index = 1
     image, label = test_dataset.__getitem__(index) # Change index to retrieve different images
-      
+
     # Display the image using matplotlib
     import matplotlib.pyplot as plt
     # Convert the tensor back to numpy for visualization
