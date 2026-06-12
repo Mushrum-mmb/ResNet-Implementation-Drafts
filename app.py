@@ -12,7 +12,7 @@ First import:
 - import warnings: is used to issue and manage warning messages in Python.
 """
 import torch
-from torchvision.models import resnet50
+from torchvision.models import resnet50, ResNet50_Weights
 import torch.nn as nn
 import os
 import numpy as np
@@ -21,6 +21,7 @@ import cv2
 import matplotlib.pyplot as plt
 import gradio as gr
 import warnings
+import gdown
 """
 The warning we are encountering indicates that we are using torch.load with the default parameter weights_only=False.
 This setting can be risky because it allows the loading of arbitrary Python objects, which could potentially execute malicious code during the unpickling process.
@@ -30,25 +31,35 @@ We will use the warnings module to ignore warnings if they become too messy.
 In a future release of PyTorch, the default value of weights_only will change to True, so the code in the future may include a parameter like weights_only=False.
 """
 warnings.filterwarnings("ignore")
+#Download dataset
+def download():
+  try:
+      BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+  except NameError:
+      BASE_DIR = os.getcwd()
+  
+  checkpoint_path = os.path.join(BASE_DIR, "resnet50_classification_animals.pt")
+  gdown.download(id="1c95rL-ZdisG02366cekZ9vC9sy5Q9KBW", output=checkpoint_path)
+  
+  return checkpoint_path
 
 # Initialize the constantly categories.
-categories = ['dog','cat','cabypara','hamster','parrot','pufferfish']
-# Set the checkpoint_path
-checkpoint_path = "/content/drive/MyDrive/checkpoint"
+categories = ['dog','cat','chicken', 'cow', 'elephant','horse','sheep', 'squirrel']
+# Download the artifact
+bestpoint = download()
 # Use PyTorch to set the device to CUDA if available; otherwise, set it to CPU.
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Device: {device}")
-  
+
 # In this section, we will choose the model. Since I am using transfer learning, I will select ResNet50 and its weights.
-model = resnet50()
+model = resnet50(weights=ResNet50_Weights.IMAGENET1K_V1)
 in_features = model.fc.in_features # Remain the in_features of Dense Layer
 del model.fc # Delete it
-model.fc = nn.Linear(in_features=in_features, out_features=6, bias=True) # Modify it to remove the fully connected layers, ensuring the output length matches the number of categories.
+model.fc = nn.Linear(in_features=in_features, out_features=len(categories), bias=True) # Modify it to remove the fully connected layers, ensuring the output length matches the number of categories.
 # Bring model into device
 model.to(device)
 
 # Load the weights and accuracy in the best.pt
-bestpoint = os.path.join(checkpoint_path, "best.pt")
 saved_data = torch.load(bestpoint, map_location=device)
 model.load_state_dict(saved_data["model"])
 # Load and print the accuracy
@@ -69,7 +80,7 @@ def classify_image(image):
   # Retrieve an image, resize and transform it to let the model can get it.
   image = cv2.resize(image, (224,224))
   # ToTensor() will be (3, 224, 224) and after unsqueeze(0), the shape will be (1, 3, 224, 224), which is suitable for model input.
-  image_tensor = transform(image).unsqueeze(0).to(device) 
+  image_tensor = transform(image).unsqueeze(0).to(device)
 
   # Start predicting and calculate the scores
   with torch.no_grad():
@@ -86,6 +97,6 @@ iface = gr.Interface(fn=classify_image,
                       inputs="image",
                       outputs="text",
                       title="Animal Classifier",
-                      description=f"Upload an image of an animal to get its classification (cat, dog, cabypara, parrot, hamster, pufferfish) <br> This project made by Phuong Nam aka Namush =)) <br> The accuracy of the model is {best*100:.1f}% <br> Note: Đã tối ưu mô hình và thu hẹp số con vật, cơ mà accuracy trên là test với bộ validation mà nó cao vãi mèo nên sú <br> Cần lắm ae test nghiêm túc =))")
+                      description=f"Upload an image of an animal to get its classification ('dog','cat','chicken', 'cow', 'elephant','horse','sheep', 'squirrel') <br> This project made by Phuong Nam aka Namush =)) <br> The accuracy of the model is {best*100:.1f}%")
 # Launch the interface
 iface.launch(share=True)
