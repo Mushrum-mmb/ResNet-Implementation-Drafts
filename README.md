@@ -27,7 +27,7 @@
 - [About](#-about)
 - [Features](#-features)
 - [Gallery](#-gallery)
-- [Local Usage](#-local-usage)
+- [Local Usage](#%EF%B8%8F-local-usage)
 - [Google Colab Usage](#-google-colab-usage)
 - [How It Works](#-how-it-works)
 - [Contributing](#-contributing)
@@ -46,12 +46,12 @@
 
 | **Accuracy** | **Model** | **Framework** | **Author** |
 |:---:|:---:|:---:|:---:|
-| **99.81% (Over-fitting)** | ResNet-50 | Gradio | [Mushrum-mmb](https://github.com/Mushrum-mmb/) |
+| **92.5%** | ResNet-50 | Gradio | [Mushrum-mmb](https://github.com/Mushrum-mmb/) |
 
 </div>
 
 ### 🌟 **Key Highlights:**
-- **State-of-the-art accuracy** at 99.81%, may be it's over-fitting.
+- **State-of-the-art accuracy** at 92.5%.
 - **Real-time predictions** with confidence scores
 - **Web-based interface** for easy access
 - **Comment tutoring** support in code
@@ -64,29 +64,39 @@
     
 ### 📊 **Current Model Performance**
 
-![Accuracy Badge](https://img.shields.io/badge/Accuracy-99.81%25-brightgreen?style=for-the-badge&logo=target&logoColor=white)
-![Status](https://img.shields.io/badge/Status-Overfitting-orange?style=for-the-badge&logo=target&logoColor=white)
+**Note:** *This exceptional accuracy is calculated from validation datasets. Real-world performance may vary. *
 
-**Note:** *This exceptional accuracy is calculated from validation datasets. Real-world performance may vary. It's also over-fitting.*
+![Accuracy Badge](https://img.shields.io/badge/Accuracy-92.5%25-brightgreen?style=for-the-badge&logo=target&logoColor=white)
+![Status](https://img.shields.io/badge/Status-ProductionReady-green?style=for-the-badge&logo=target&logoColor=white)
+
+
+*Confusion matrix*
+
 
 <div align="center">
-<img src="https://github.com/user-attachments/assets/15509cc8-ad6e-4a65-aa44-0297fbffdb9f" alt="Individual Image Results" width="45%"/>
-<img src="https://github.com/user-attachments/assets/790bfbe7-4385-489f-92fa-9279ba989c00" alt="Performance Metrics" width="45%"/>
+<img width="2000" height="2000" alt="image" src="https://github.com/user-attachments/assets/1106b18c-5d97-40b0-aa29-302cd5a2c9b5" />
+
 </div>
 
+
+*Tensorboard quick view and comparison*
+
+
 <div align="center">
-<img src="https://github.com/user-attachments/assets/46f773bf-4750-4be9-99ce-519df895aeed" alt="Training Progress" width="30%"/>
-<img src="https://github.com/user-attachments/assets/c580c9c8-07c0-40bf-af62-96fd00013b82" alt="Validation Results" width="30%"/>
-<img src="https://github.com/user-attachments/assets/d5d7006c-66b2-4c90-9fa3-f9bdc218376b" alt="Model Architecture" width="30%"/>
+<img width="864" height="555" alt="image" src="https://github.com/user-attachments/assets/d6188475-da14-4c6b-babd-b779df8eb3d6" />
+<img width="652" height="411" alt="image" src="https://github.com/user-attachments/assets/af32bd6e-cfd3-4a70-909c-a218f47a2290" />
+   
 </div>
+
 
 *Examples of successful animal image classification*
 
-</div>
 
-![image](https://github.com/user-attachments/assets/df568fd1-b25f-49e3-92c5-360d37624238)
-![image](https://github.com/user-attachments/assets/4556fa99-a84a-4df5-8e14-5cdbf633069f)
- 
+</div>
+<img width="1876" height="787" alt="image" src="https://github.com/user-attachments/assets/611ea1c2-31da-4444-9481-c5f7a8298f1f" />
+<img width="1856" height="896" alt="image" src="https://github.com/user-attachments/assets/554bf682-34ce-47a2-9c56-69ffe952595a" />
+<img width="1859" height="963" alt="image" src="https://github.com/user-attachments/assets/8ea137ca-b794-4807-b2f7-e7b95d376705" />
+
 </div>
 
 ---
@@ -127,26 +137,20 @@
 
 **Step 1:** Clone the repository
 ```bash
-git clone https://github.com/Mushrum-mmb/Simple-AI-Image-Classification.git
+git clone https://github.com/Mushrum-mmb/ResNet-Implementation-Drafts.git
 ```
 
 **Step 2:** Navigate to project directory
 ```bash
-cd Simple-AI-Image-Classification
+cd ResNet-Implementation-Drafts
 ```
 
 **Step 3:** Launch the application
 ```bash
-python run.py --checkpoint "path/to/your/checkpoint/folder"
+python app.py
 ```
 
 <div align="center">
-
-### 📱 **Example Usage:**
-```bash
-python run.py --checkpoint "C:\Users\DELL\Downloads\Training artifacts\checkpoint"
-```
-
 ### 🎉 **Your AI is Ready!**
 Open the provided link in your browser and start classifying images!
 
