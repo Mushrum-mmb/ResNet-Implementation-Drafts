@@ -145,7 +145,12 @@ git clone https://github.com/Mushrum-mmb/ResNet-Implementation-Drafts.git
 cd ResNet-Implementation-Drafts
 ```
 
-**Step 3:** Launch the application
+**Step 3:** Install the requirements
+```bash
+pip install -r requirements.txt
+```
+
+**Step 4:** Launch the application
 ```bash
 python app.py
 ```
@@ -156,7 +161,7 @@ Open the provided link in your browser and start classifying images!
 
 </div>
 
-![Usage Example](https://github.com/user-attachments/assets/07360da9-aae1-4797-bfef-9f2ea7aba9a4)
+<img width="872" height="361" alt="image" src="https://github.com/user-attachments/assets/0ef57810-6335-4b80-a73a-dc2926c7ba76" />
 
 ---
 
