@@ -1,4 +1,60 @@
 """
+Since Google Colab code is organized by cell, I can't import the class from my script in training.
+That's why I uploaded the entire script of my dataset here.
+"""
+from torch.utils.data import Dataset
+import os
+import numpy as np
+from torchvision.transforms import ToTensor, Normalize, Compose
+import random
+import cv2
+
+# Create a class for our dataset.
+class AnimalDatasets(Dataset):
+    def __init__(self, root, is_train, height, width, size= None):
+        # Initialize the images and labels lists, the height and width of the images, and the constantly categories.
+        self.images = []
+        self.labels = []
+        self.height = height
+        self.width = width
+        self.categories = ['dog','cat','chicken', 'cow', 'elephant','horse','sheep', 'squirrel']
+        # Initialize the mean and standard deviation for normalization. Compose the ToTensor() and Normalize() functions to initialize the transforms.
+        mean = np.array([0.485, 0.456, 0.406])
+        std = np.array([0.229, 0.224, 0.225])
+        self.transform = Compose([
+            ToTensor(),
+            Normalize(mean, std)
+        ])
+        # If is_train is true, we join the path to the training dataset; otherwise, we join it to the validation dataset.
+        if is_train:
+            data_path = os.path.join(root, 'train')
+        else:
+            data_path = os.path.join(root, 'val')
+        # Collect all images path and label iterate to our list through loop
+        for i, category in enumerate(self.categories):
+            image_paths = os.path.join(data_path, category)
+            for path in os.listdir(image_paths):
+                image_path = os.path.join(image_paths, path)
+                self.images.append(image_path)
+                self.labels.append(i)
+        # Collect all image paths and labels, and iterate through the loop to add them to our lists.
+        if size is not None and size < len(self.images):
+            indices = random.sample(range(len(self.images)), size)
+            self.images = [self.images[i] for i in indices]
+            self.labels = [self.labels[i] for i in indices]
+    #Define a __len__ function to retrieve length of images.
+    def __len__(self):
+        return len(self.images)
+    # Define a __getitem__ function to retrieve images.
+    def __getitem__(self, idx):
+        image_path = self.images[idx]
+        image = cv2.imread(image_path)
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        image = cv2.resize(image, (self.height, self.width))
+        image = self.transform(image)
+        label = self.labels[idx]
+        return image, label
+"""
 In this script, we will load the data and start training it, as we are creating an AI for image classification, which is a basic deep learning AI.
 I will use transfer learning to optimize the model and reduce training time.
 As usual, we will run the script in CMD or terminal, but I am using Google Colab to train this model, which is why I haven't created a function to parse command-line arguments.
@@ -20,9 +76,11 @@ First import:
 - import warnings: is used to issue and manage warning messages in Python.
 """
 import argparse
+import gdown
+import zipfile
 import os
 from torch.utils.tensorboard import SummaryWriter
-from Datasets import AnimalDatasets
+# from Datasets import AnimalDatasets
 from torch.utils.data import DataLoader
 import torch
 from torchvision.models import resnet50, ResNet50_Weights
@@ -31,7 +89,7 @@ from tqdm import tqdm
 import numpy as np
 from sklearn.metrics import accuracy_score, confusion_matrix
 import matplotlib.pyplot as plt
-import warnings 
+import warnings
 """
 The warning we are encountering indicates that we are using torch.load with the default parameter weights_only=False.
 This setting can be risky because it allows the loading of arbitrary Python objects, which could potentially execute malicious code during the unpickling process.
@@ -44,7 +102,7 @@ warnings.filterwarnings("ignore")
 
 # Defines a function to parse command-line arguments for the script.
 def get_args():
-  parser = argparse.ArgumentParser(description= "Animal Classifier")
+  parser = parser.ArgumentParser(description= "Animal Classifier")
 
   parser.add_argument("--num-epochs","-e", type=int, default=75, help="Number of epochs")
   parser.add_argument("--batch-size", "-b", type=int, default=64, help="batch size of training procedure")
@@ -55,16 +113,30 @@ def get_args():
   parser.add_argument("--learning-rate", "-l",type=float, default=1e-3, help="learning rate of optimizer")
 
   parser.add_argument("--resume-training", "-r", type=bool, default=False, help="Continue training or not")
-  
-  parser.add_argument("--dataset-path", "-d", type=str, help="path to dataset")
+
   parser.add_argument("--tensorboard-path", "-o", type=str, help="tensorboard folder")
   parser.add_argument("--checkpoint-path", "-c", type=str, help="checkpoint folder")
-    
+
   args = parser.parse_args()
   return args
 
+def download():
+  try:
+      BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+  except NameError:
+      BASE_DIR = os.getcwd()
+  zip_path = os.path.join(BASE_DIR, "dataset.zip")
+  gdown.download(id="1epzmENKDQZpEFIMpIz0SgPgf8mKDFps6", output=zip_path)
+
+  extract_path = os.path.join(BASE_DIR, "data")
+  with zipfile.ZipFile(zip_path, "r") as zip_ref:
+      zip_ref.extractall(extract_path)
+  os.remove(zip_path)
+  final_path = os.path.join(extract_path, "AnimalDataset")
+  return BASE_DIR, final_path
+
 # Defines a train function.
-def train():  #def train(args):
+def train(resume_training):  #def train(args):
   # Initialize num_epochs, batch_size, height, width, num_train, num_val, learning_rate
   num_epochs = 75 #args.num_epochs
   batch_size = 64 #args.batch_size
@@ -74,12 +146,13 @@ def train():  #def train(args):
   num_val = None #args.num_val
   learning_rate = 1e-3 #args.learning_rate
   # Boolean resume_training
-  resume_training = False
   # Add path of dataset, tensorboard and checkpoint
-  dataset_path = "/content/drive/MyDrive/AnimalDataset" #args.dataset_path
-  tensorboard_path = "/content/drive/MyDrive/tensorboard" #args.tensorboard_path
-  checkpoint_path = "/content/drive/MyDrive/checkpoint" #args.checkpoint_path
-  
+  base_dir, dataset_path = download()
+  tensorboard_path = os.path.join(base_dir, "tensorboard") #args.tensorboard_path
+  checkpoint_path = os.path.join(base_dir, "checkpoint") #args.checkpoint_path
+  print("tensorboard_path: " + tensorboard_path)
+  print("checkpoint_path: " + checkpoint_path)
+
   # Create the TensorBoard and checkpoint paths if they do not exist.
   if not os.path.exists(tensorboard_path):
     os.makedirs(tensorboard_path)
@@ -88,7 +161,7 @@ def train():  #def train(args):
 
   # Visualization within the TensorBoard UI.
   writer = SummaryWriter(tensorboard_path)
-  
+
   # Retrieve the training and validation datasets. Use a DataLoader to retrieve images in batch size, shuffle them, and drop the last batch if needed.
   train_datasets = AnimalDatasets(dataset_path, True, height, width, num_train)
   val_datasets = AnimalDatasets(dataset_path, False, height, width, num_val)
@@ -108,11 +181,11 @@ def train():  #def train(args):
     num_workers = 2,
     drop_last = False
   )
-  
+
   # Use PyTorch to set the device to CUDA if available; otherwise, set it to CPU.
   device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
   print(f"Device: {device}")
-  
+
   # In this section, we will choose the model. Since I am using transfer learning, I will select ResNet50 and its weights.
   model = resnet50(weights=ResNet50_Weights.IMAGENET1K_V1)
   in_features = model.fc.in_features # Remain the in_features of Dense Layer
@@ -120,11 +193,11 @@ def train():  #def train(args):
   model.fc = nn.Linear(in_features=in_features, out_features=len(train_datasets.categories), bias=True) # Modify it to remove the fully connected layers, ensuring the output length matches the number of categories.
   # Bring model into device
   model.to(device)
-  
+
   # Loss and Optimizer Setup
   criterion = nn.CrossEntropyLoss()
   optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
-  
+
   # Create Resume Training Logic
   if resume_training:
     # Load last point
@@ -152,7 +225,7 @@ def train():  #def train(args):
     # Initalize counter total losses and progress bar for per training phase
     total_losses = []
     progress_bar = tqdm(train_dataloader, colour="yellow")
-    
+
     for iter, (images, labels) in enumerate(progress_bar):
       # Forward pass
       images = images.to(device)
@@ -162,7 +235,7 @@ def train():  #def train(args):
       loss = criterion(output, labels)
       total_losses.append(loss.item())
       avg_loss = np.mean(total_losses) # We will observe the average loss for per batch size
-      
+
       # Visualization
       progress_bar.set_description(f"Training phase at epoch: {epoch+1}/{num_epochs}, Avg_Loss: {avg_loss:.4f}")
       writer.add_scalar("Train/Loss", loss, global_step= epoch*len(train_dataloader)+iter)
@@ -203,17 +276,17 @@ def train():  #def train(args):
         # Visualization
         progress_bar.set_description(f"Validation phase at epoch: {epoch+1}/{num_epochs}, Avg_Loss: {avg_loss:.4f}")
 
-    # We will observe the average loss after evaluating all batches
+    avg_loss = np.mean(total_losses) # We will observe the average loss after evaluating all batches
     # Visualization
-    final_avg_loss = np.mean(total_losses)
-    writer.add_scalar("Val/Loss", final_avg_loss, global_step=epoch)
+    avg_loss = np.mean(total_losses)
+    writer.add_scalar("Val/Loss", avg_loss, global_step=epoch)
     accuracy = accuracy_score(all_labels, all_predictions)
     writer.add_scalar("Val/Accuracy", accuracy, global_step=epoch)
-    print(f"Epoch: {epoch+1}, Validation Loss: {final_avg_loss:.4f}, Validation Accuracy now: {accuracy:.4f}")
+    print(f"Epoch: {epoch+1}, Validation Loss: {avg_loss:.4f}, Validation Accuracy now: {accuracy:.4f}")
     # Visualize the confusion matrix of a classification model, which helps you understand how well the model is performing across different classes
     plot_confusion_matrix(writer, confusion_matrix(all_labels, all_predictions), train_datasets.categories, epoch)
 
-    # Checkpoint saving 
+    # Checkpoint saving
     saved_data = {
             "model": model.state_dict(),
             "optimizer": optimizer.state_dict(),
@@ -268,4 +341,4 @@ def plot_confusion_matrix(writer, cm, class_names, epoch):
   writer.add_figure('confusion_matrix', figure, epoch)
 
 if __name__ == '__main__':
-  train()
+  train(resume_training = False)
